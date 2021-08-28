@@ -1,11 +1,12 @@
-import '@aws-cdk/assert/jest';
-import { App } from '@aws-cdk/core';
-import { MyStack } from '../src/main';
+import { SynthUtils } from "@aws-cdk/assert";
+import { App } from "@aws-cdk/core";
+import { BillingStack } from "../src/stacks/billing-stack";
 
-test('Snapshot', () => {
+test("Snapshot", () => {
   const app = new App();
-  const stack = new MyStack(app, 'test');
-
-  expect(stack).not.toHaveResource('AWS::S3::Bucket');
-  expect(app.synth().getStackArtifact(stack.artifactId).template).toMatchSnapshot();
+  const stack = new BillingStack(app, "test", {
+    budgetAmount: 10,
+    emailAddress: "test@test.com",
+  });
+  expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
 });
