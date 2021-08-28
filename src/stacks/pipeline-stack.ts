@@ -1,3 +1,4 @@
+import * as path from "path";
 import {
   BuildSpec,
   LinuxBuildImage,
@@ -15,7 +16,7 @@ export class PipelineStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
     const SOURCE_OUTPUT = new Artifact("SourceOutput");
-    const pipeline = new Pipeline(this, "SimplePipeline", {
+    const pipeline = new Pipeline(this, "TestSimplePipeline", {
       pipelineName: "SimplePipeline",
       crossAccountKeys: false,
     });
@@ -47,7 +48,7 @@ export class PipelineStack extends cdk.Stack {
               buildImage: LinuxBuildImage.STANDARD_5_0,
             },
             buildSpec: BuildSpec.fromSourceFilename(
-              "build-specs/cdk-build-spec.yml"
+              path.resolve(__dirname, "../../build-specs/cdk-build-spec.yml")
             ),
           }),
         }),
