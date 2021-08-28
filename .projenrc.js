@@ -6,6 +6,7 @@ const project = new AwsCdkTypeScriptApp({
     "@aws-cdk/aws-codepipeline",
     "@aws-cdk/aws-codepipeline-actions",
     "@aws-cdk/aws-budgets",
+    "@aws-cdk/aws-codebuild",
   ],
   name: "simple-cdk-pipeline",
   eslintOptions: {
